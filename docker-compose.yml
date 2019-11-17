@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  wishlist:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    depends_on:
+      - mysql
+  mysql:
+    container_name: wishlist_mysql
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: wishlist
+      MYSQL_USER: luizalabs
+      MYSQL_PASSWORD: luizalabs
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+networks:
+  backend:
