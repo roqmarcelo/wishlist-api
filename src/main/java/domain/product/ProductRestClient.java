@@ -1,6 +1,7 @@
-package domain.wishlist;
+package domain.product;
 
 import com.google.gson.Gson;
+import infrastructure.exception.NotFoundException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,17 +19,23 @@ class ProductRestClient {
 
     private static final String PRODUCT_API_URL = "http://challenge-api.luizalabs.com/api/product/%s";
 
+    private ProductRestClient() {
+    }
+
     // TODO add resilience4j circuit breaker
-    ProductResponse get(final String productId) throws IOException, InterruptedException {
+    static ProductResponse get(final String productId) {
         HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format(PRODUCT_API_URL, productId)))
                 .build();
 
-        HttpResponse<ProductResponse> response = client.send(request, JsonBodyHandler.ofJson());
-
-        return response.body();
+        try {
+            HttpResponse<ProductResponse> response = client.send(request, JsonBodyHandler.ofJson());
+            return response.body();
+        } catch (IOException | InterruptedException e) {
+            throw new NotFoundException("Product information not found.");
+        }
     }
 
     private static class JsonBodyHandler implements HttpResponse.BodyHandler<ProductResponse> {

@@ -8,7 +8,7 @@ class Customer {
     private String email;
 
     Customer(final Long id, final String name, final String email) {
-        this.id = Objects.requireNonNull(id, "Id cannot be null.");
+        this.id = id;
         this.name = Objects.requireNonNull(name, "Name cannot be null.");
         this.email = Objects.requireNonNull(email, "E-mail cannot be null.");
     }

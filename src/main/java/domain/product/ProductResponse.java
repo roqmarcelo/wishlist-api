@@ -1,24 +1,15 @@
-package domain.wishlist;
+package domain.product;
 
-class Product {
-    private Long id;
-    private Long customerId;
-    private String productId;
+class ProductResponse {
+
+    private String id;
     private String title;
     private String image;
     private Double price;
     private Integer reviewScore;
 
-    public Long getId() {
+    public String getId() {
         return id;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public String getProductId() {
-        return productId;
     }
 
     public String getTitle() {
@@ -35,5 +26,9 @@ class Product {
 
     public Integer getReviewScore() {
         return reviewScore;
+    }
+
+    Product asProduct() {
+        return new Product(id, title, image, price, reviewScore);
     }
 }

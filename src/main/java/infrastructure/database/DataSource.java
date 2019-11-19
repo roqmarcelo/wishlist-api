@@ -24,7 +24,6 @@ public class DataSource {
             HikariConfig config = new HikariConfig(properties);
             dataSource = new HikariDataSource(config);
         } catch (IOException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }

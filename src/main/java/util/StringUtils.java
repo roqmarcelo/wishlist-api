@@ -1,8 +1,8 @@
 package util;
 
-public class Util {
+public class StringUtils {
 
-    private Util() {}
+    private StringUtils() {}
 
     public static boolean isNullOrEmpty(final String value) {
         return value == null || value.trim().isEmpty();

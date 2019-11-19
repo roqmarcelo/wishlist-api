@@ -1,22 +1,24 @@
 package domain.customer;
 
-import infrastructure.exception.CustomerNotFoundException;
 import infrastructure.exception.EmailAlreadyRegisteredException;
+import infrastructure.exception.NotFoundException;
 
+import javax.inject.Inject;
 import java.util.Objects;
 
-class CustomerService {
+public class CustomerService {
 
     private final CustomerDAO customerDAO;
 
-    CustomerService(final CustomerDAO customerDAO) {
+    @Inject
+    public CustomerService(final CustomerDAO customerDAO) {
         this.customerDAO = customerDAO;
     }
 
     Customer find(final Long id) {
         final Customer customer = customerDAO.find(id);
         if (customer == null) {
-            throw new CustomerNotFoundException();
+            throw new NotFoundException("Customer not found.");
         }
         return customer;
     }
@@ -45,7 +47,7 @@ class CustomerService {
             throw new EmailAlreadyRegisteredException();
         }
         if (!customerDAO.update(customer)) {
-            throw new CustomerNotFoundException();
+            throw new NotFoundException("Customer not found.");
         }
         return customer.getId();
     }

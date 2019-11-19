@@ -4,7 +4,7 @@ import infrastructure.database.DataSource;
 
 import java.sql.*;
 
-class CustomerDAO {
+public class CustomerDAO {
 
     private static final String SELECT_CUSTOMER_SQL = "SELECT name, email FROM customer WHERE id = ?";
     private static final String INSERT_CUSTOMER_SQL = "INSERT INTO customer(name, email) VALUES (?, ?)";
@@ -36,11 +36,11 @@ class CustomerDAO {
             statement.setString(2, customer.getEmail());
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Could not create client.");
+                throw new SQLException("Could not create customer.");
             }
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (!generatedKeys.next()) {
-                    throw new SQLException("Could not create client.");
+                    throw new SQLException("Could not create customer.");
                 }
                 return generatedKeys.getLong(1);
             }
