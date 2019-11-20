@@ -21,12 +21,10 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
     @Override
     protected Injector getInjector() {
-        System.out.println("getInjector()");
         return Guice.createInjector(new ServletModule() {
             @Override
             protected void configureServlets() {
                 super.configureServlets();
-                System.out.println("configureServlets()");
                 serve(URL_PATTERN).with(RestServlet.class);
                 bind(CustomerDAO.class);
                 bind(CustomerService.class);
