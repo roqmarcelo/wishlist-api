@@ -1,4 +1,4 @@
-package domain.product;
+package com.luizalabs.domain.product;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,9 +1,9 @@
-package rest;
+package com.luizalabs.rest;
 
-import domain.customer.CustomerResourceHandler;
-import domain.product.ProductResourceHandler;
-import rest.RestRequestResolver.RestRequestResult;
-import rest.RestRequestResolver.RestRequestResult.RestRequestType;
+import com.luizalabs.domain.customer.CustomerResourceHandler;
+import com.luizalabs.domain.product.ProductResourceHandler;
+import com.luizalabs.rest.RestRequestResolver.RestRequestResult;
+import com.luizalabs.rest.RestRequestResolver.RestRequestResult.RestRequestType;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

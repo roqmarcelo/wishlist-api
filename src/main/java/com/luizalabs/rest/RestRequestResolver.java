@@ -1,7 +1,7 @@
-package rest;
+package com.luizalabs.rest;
 
-import rest.RestRequestResolver.RestRequestResult.RestRequestType;
-import util.StringUtils;
+import com.luizalabs.rest.RestRequestResolver.RestRequestResult.RestRequestType;
+import com.luizalabs.util.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,22 +45,22 @@ public class RestRequestResolver {
 
     public static class RestRequestResult {
 
-        enum RestRequestType { CUSTOMER, PRODUCT, NONE }
+        public enum RestRequestType { CUSTOMER, PRODUCT, NONE }
 
         private Long customerId;
         private String productId;
         private RestRequestType type;
 
-        RestRequestResult(final RestRequestType type) {
+        public RestRequestResult(final RestRequestType type) {
             this.type = type;
         }
 
-        RestRequestResult(final RestRequestType type, Long customerId) {
+        public RestRequestResult(final RestRequestType type, Long customerId) {
             this.type = type;
             this.customerId = customerId;
         }
 
-        RestRequestResult(final RestRequestType type, Long customerId, final String productId) {
+        public RestRequestResult(final RestRequestType type, Long customerId, final String productId) {
             this.type = type;
             this.customerId = customerId;
             this.productId = productId;

@@ -1,4 +1,4 @@
-package domain.product;
+package com.luizalabs.domain.product;
 
 class Product {
 

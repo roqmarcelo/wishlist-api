@@ -1,4 +1,4 @@
-package infrastructure.exception;
+package com.luizalabs.infrastructure.exception;
 
 public class ProductAlreadyAddedException extends RuntimeException {
     public ProductAlreadyAddedException() {

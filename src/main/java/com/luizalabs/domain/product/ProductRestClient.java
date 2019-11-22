@@ -1,7 +1,7 @@
-package domain.product;
+package com.luizalabs.domain.product;
 
 import com.google.gson.Gson;
-import infrastructure.exception.NotFoundException;
+import com.luizalabs.infrastructure.exception.NotFoundException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,9 +11,8 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodySubscriber;
 import java.net.http.HttpResponse.BodySubscribers;
 import java.net.http.HttpResponse.ResponseInfo;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-
-import static jdk.internal.net.http.common.Utils.charsetFrom;
 
 class ProductRestClient {
 
@@ -24,7 +23,7 @@ class ProductRestClient {
 
     // TODO add resilience4j circuit breaker
     static ProductResponse get(final String productId) {
-        HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build();
+        HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format(PRODUCT_API_URL, productId)))
@@ -48,7 +47,7 @@ class ProductRestClient {
 
         @Override
         public BodySubscriber<ProductResponse> apply(ResponseInfo responseInfo) {
-            return BodySubscribers.mapping(BodySubscribers.ofString(charsetFrom(responseInfo.headers())),
+            return BodySubscribers.mapping(BodySubscribers.ofString(StandardCharsets.UTF_8),
                     value -> gson.fromJson(value, ProductResponse.class));
         }
     }

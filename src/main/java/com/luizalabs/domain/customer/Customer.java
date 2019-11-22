@@ -1,4 +1,4 @@
-package domain.customer;
+package com.luizalabs.domain.customer;
 
 import java.util.Objects;
 

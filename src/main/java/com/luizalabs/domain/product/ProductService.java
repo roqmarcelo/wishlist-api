@@ -1,7 +1,7 @@
-package domain.product;
+package com.luizalabs.domain.product;
 
-import infrastructure.exception.NotFoundException;
-import infrastructure.exception.ProductAlreadyAddedException;
+import com.luizalabs.infrastructure.exception.NotFoundException;
+import com.luizalabs.infrastructure.exception.ProductAlreadyAddedException;
 
 import javax.inject.Inject;
 import java.util.List;

@@ -1,7 +1,8 @@
-package domain.customer;
+package com.luizalabs.domain.customer;
 
-import infrastructure.database.DataSource;
+import com.luizalabs.infrastructure.database.DataSource;
 
+import javax.inject.Inject;
 import java.sql.*;
 
 public class CustomerDAO {
@@ -12,8 +13,15 @@ public class CustomerDAO {
     private static final String DELETE_CUSTOMER_SQL = "DELETE FROM customer WHERE id = ?";
     private static final String EXISTS_CUSTOMER_SQL = "SELECT count(id) FROM customer WHERE email = ?";
 
+    private final DataSource dataSource;
+
+    @Inject
+    CustomerDAO(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     Customer find(final Long id) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_CUSTOMER_SQL)) {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -30,7 +38,7 @@ public class CustomerDAO {
     }
 
     Long save(final Customer customer) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_CUSTOMER_SQL, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, customer.getName());
             statement.setString(2, customer.getEmail());
@@ -50,7 +58,7 @@ public class CustomerDAO {
     }
 
     boolean update(final Customer customer) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_CUSTOMER_SQL)) {
             statement.setString(1, customer.getName());
             statement.setString(2, customer.getEmail());
@@ -62,7 +70,7 @@ public class CustomerDAO {
     }
 
     boolean delete(final Long id) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_CUSTOMER_SQL)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
@@ -72,7 +80,7 @@ public class CustomerDAO {
     }
 
     boolean existsBy(final String email) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(EXISTS_CUSTOMER_SQL)) {
             statement.setString(1, email);
             try (ResultSet resultSet = statement.executeQuery()) {

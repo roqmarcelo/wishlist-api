@@ -1,10 +1,10 @@
-package domain.customer;
+package com.luizalabs.domain.customer;
 
 import com.google.gson.JsonObject;
-import infrastructure.exception.EmailAlreadyRegisteredException;
-import infrastructure.exception.NotFoundException;
-import rest.AbstractResourceHandler;
-import rest.RestRequestResolver.RestRequestResult;
+import com.luizalabs.infrastructure.exception.EmailAlreadyRegisteredException;
+import com.luizalabs.infrastructure.exception.NotFoundException;
+import com.luizalabs.rest.AbstractResourceHandler;
+import com.luizalabs.rest.RestRequestResolver.RestRequestResult;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ public class CustomerResourceHandler extends AbstractResourceHandler {
     private final CustomerService customerService;
 
     @Inject
-    public CustomerResourceHandler(final CustomerService customerService) {
+    CustomerResourceHandler(final CustomerService customerService) {
         this.customerService = customerService;
     }
 

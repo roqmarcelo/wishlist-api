@@ -1,4 +1,4 @@
-package domain.product;
+package com.luizalabs.domain.product;
 
 class ProductResponse {
 
@@ -8,23 +8,34 @@ class ProductResponse {
     private Double price;
     private Integer reviewScore;
 
+    ProductResponse() {
+    }
+
+    ProductResponse(final String id, final String title, final String image, final Double price, final Integer reviewScore) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.price = price;
+        this.reviewScore = reviewScore;
+    }
+
     public String getId() {
         return id;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public String getImage() {
+    String getImage() {
         return image;
     }
 
-    public Double getPrice() {
+    Double getPrice() {
         return price;
     }
 
-    public Integer getReviewScore() {
+    Integer getReviewScore() {
         return reviewScore;
     }
 

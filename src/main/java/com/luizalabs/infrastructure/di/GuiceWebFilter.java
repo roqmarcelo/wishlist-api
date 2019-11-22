@@ -1,4 +1,4 @@
-package infrastructure.di;
+package com.luizalabs.infrastructure.di;
 
 import com.google.inject.servlet.GuiceFilter;
 

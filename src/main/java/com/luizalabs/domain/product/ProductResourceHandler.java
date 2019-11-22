@@ -1,11 +1,11 @@
-package domain.product;
+package com.luizalabs.domain.product;
 
 import com.google.gson.JsonObject;
-import infrastructure.exception.NotFoundException;
-import infrastructure.exception.ProductAlreadyAddedException;
-import rest.AbstractResourceHandler;
-import rest.RestRequestResolver.RestRequestResult;
-import util.StringUtils;
+import com.luizalabs.infrastructure.exception.NotFoundException;
+import com.luizalabs.infrastructure.exception.ProductAlreadyAddedException;
+import com.luizalabs.rest.AbstractResourceHandler;
+import com.luizalabs.rest.RestRequestResolver.RestRequestResult;
+import com.luizalabs.util.StringUtils;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ public class ProductResourceHandler extends AbstractResourceHandler {
     private final ProductService productService;
 
     @Inject
-    public ProductResourceHandler(final ProductService productService) {
+    ProductResourceHandler(final ProductService productService) {
         this.productService = productService;
     }
 
@@ -43,7 +43,7 @@ public class ProductResourceHandler extends AbstractResourceHandler {
 
     @Override
     public void handlePost(final RestRequestResult result, final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        Objects.requireNonNull(response, "HttpServletRequest request cannot be null.");
+        Objects.requireNonNull(request, "HttpServletRequest request cannot be null.");
         Objects.requireNonNull(response, "HttpServletResponse response cannot be null.");
 
         try {

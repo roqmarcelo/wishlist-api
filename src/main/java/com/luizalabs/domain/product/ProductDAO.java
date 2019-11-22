@@ -1,7 +1,8 @@
-package domain.product;
+package com.luizalabs.domain.product;
 
-import infrastructure.database.DataSource;
+import com.luizalabs.infrastructure.database.DataSource;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +17,15 @@ public class ProductDAO {
     private static final String DELETE_PRODUCT_SQL = "DELETE FROM product WHERE customerId = ? and productId = ?";
     private static final String EXISTS_PRODUCT_SQL = "SELECT count(id) FROM product WHERE customerId = ? and productId = ?";
 
+    private final DataSource dataSource;
+
+    @Inject
+    ProductDAO(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     List<Product> list(final Long customerId) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_CUSTOMER_PRODUCTS_SQL)) {
             statement.setLong(1, customerId);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -29,7 +37,7 @@ public class ProductDAO {
     }
 
     Product find(final Long customerId, final String productId) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_PRODUCT_SQL)) {
             statement.setLong(1, customerId);
             statement.setString(1, productId);
@@ -42,7 +50,7 @@ public class ProductDAO {
     }
 
     void save(final Product product) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_PRODUCT_SQL)) {
             statement.setLong(1, product.getCustomerId());
             statement.setString(2, product.getProductId());
@@ -60,7 +68,7 @@ public class ProductDAO {
     }
 
     boolean delete(final Long customerId, final String productId) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_SQL)) {
             statement.setLong(1, customerId);
             statement.setString(2, productId);
@@ -71,7 +79,7 @@ public class ProductDAO {
     }
 
     boolean exists(final Long customerId, final String productId) {
-        try (Connection connection = DataSource.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(EXISTS_PRODUCT_SQL)) {
             statement.setLong(1, customerId);
             statement.setString(2, productId);

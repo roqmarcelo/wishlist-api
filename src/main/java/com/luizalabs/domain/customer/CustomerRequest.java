@@ -1,9 +1,9 @@
-package domain.customer;
+package com.luizalabs.domain.customer;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-import static util.StringUtils.exceedsMaxLength;
-import static util.StringUtils.isNullOrEmpty;
+import static com.luizalabs.util.StringUtils.exceedsMaxLength;
+import static com.luizalabs.util.StringUtils.isNullOrEmpty;
 
 class CustomerRequest {
 
@@ -11,6 +11,11 @@ class CustomerRequest {
 
     private String name;
     private String email;
+
+    CustomerRequest(final String name, final String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     String getName() {
         return name;

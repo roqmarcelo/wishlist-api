@@ -1,16 +1,16 @@
-package infrastructure.di;
+package com.luizalabs.infrastructure.di;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
-import domain.customer.CustomerDAO;
-import domain.customer.CustomerResourceHandler;
-import domain.customer.CustomerService;
-import domain.product.ProductDAO;
-import domain.product.ProductResourceHandler;
-import domain.product.ProductService;
-import rest.RestServlet;
+import com.luizalabs.domain.customer.CustomerDAO;
+import com.luizalabs.domain.customer.CustomerResourceHandler;
+import com.luizalabs.domain.customer.CustomerService;
+import com.luizalabs.domain.product.ProductDAO;
+import com.luizalabs.domain.product.ProductResourceHandler;
+import com.luizalabs.domain.product.ProductService;
+import com.luizalabs.rest.RestServlet;
 
 import javax.servlet.annotation.WebListener;
 

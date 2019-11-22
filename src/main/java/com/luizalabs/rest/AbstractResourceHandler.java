@@ -1,7 +1,8 @@
-package rest;
+package com.luizalabs.rest;
 
 import com.google.gson.Gson;
-import rest.RestRequestResolver.RestRequestResult;
+import com.google.gson.JsonSyntaxException;
+import com.luizalabs.rest.RestRequestResolver.RestRequestResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,18 +13,18 @@ public abstract class AbstractResourceHandler {
 
     private final Gson gson = new Gson();
 
-    protected <T> T getRequestAsJson(HttpServletRequest request, Class<T> type) {
+    public <T> T getRequestAsJson(HttpServletRequest request, Class<T> type) throws IOException {
         Objects.requireNonNull(request, "HttpServletRequest request cannot be null.");
         Objects.requireNonNull(type, "Class type cannot be null.");
 
         try {
             return gson.fromJson(request.getReader(), type);
-        } catch (IOException e) {
+        } catch (JsonSyntaxException e) {
             return null;
         }
     }
 
-    protected <T> void sendResponseAsJson(HttpServletResponse response, T entity, int status) throws IOException {
+    public <T> void sendResponseAsJson(HttpServletResponse response, T entity, int status) throws IOException {
         Objects.requireNonNull(response, "HttpServletResponse response cannot be null.");
         Objects.requireNonNull(entity, "Response entity cannot be null.");
 

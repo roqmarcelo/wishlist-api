@@ -1,7 +1,7 @@
-package domain.customer;
+package com.luizalabs.domain.customer;
 
-import infrastructure.exception.EmailAlreadyRegisteredException;
-import infrastructure.exception.NotFoundException;
+import com.luizalabs.infrastructure.exception.EmailAlreadyRegisteredException;
+import com.luizalabs.infrastructure.exception.NotFoundException;
 
 import javax.inject.Inject;
 import java.util.Objects;
@@ -11,7 +11,7 @@ public class CustomerService {
     private final CustomerDAO customerDAO;
 
     @Inject
-    public CustomerService(final CustomerDAO customerDAO) {
+    CustomerService(final CustomerDAO customerDAO) {
         this.customerDAO = customerDAO;
     }
 
