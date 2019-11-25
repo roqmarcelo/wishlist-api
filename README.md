@@ -54,14 +54,36 @@ This will run all unit tests and produce a coverage report located at **target/j
 
 ## Resources
 
+### Auth
+This API is secured by JWT and the authentication endpoint lives under ```/auth/```.
+
+There is an user generated automatically when the application starts for the first time with the given credentials:
+
+Username: admin<br>
+Password: admin
+
+* Authenticate
+  * POST http://localhost:8080/api/auth/
+  * Body:
+  ```
+  {
+    "username": "admin",
+    "password": "radmin"
+  }
+  ```
+*All subsequent requests need to have the Authorization header set. Ex.:*
+  ```
+  Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.7ZO2ZRMZd8y1PmGa_Cb5mCC98r-LL5nhDdwOZrszjfx5p_9rqO1a5r9qTfVK9sWr_mIFHpnUKfj1E6wgIdlvUw 
+  ```
+ 
 ### Customers
 Customers are identified by their ids, which are unique integers, and live under ```/customers/<id>```.
 
 * Find Customer By Id
-  * GET: http://localhost:8080/customers/1/
+  * GET: http://localhost:8080/api/customers/1/
   
 * Create Customer
-  * POST: http://localhost:8080/customers/
+  * POST: http://localhost:8080/api/customers/
   * Body:
   ```
   {
@@ -71,7 +93,7 @@ Customers are identified by their ids, which are unique integers, and live under
   ```
 
 * Update Customer
-  * PUT: http://localhost:8080/customers/1/
+  * PUT: http://localhost:8080/api/customers/1/
   * Body:
   ```
   {
@@ -81,22 +103,22 @@ Customers are identified by their ids, which are unique integers, and live under
   ```
   
 * Delete Customer
-  * DELETE: http://localhost:8080/customers/1/
+  * DELETE: http://localhost:8080/api/customers/1/
   
 ## Wishlist
 Wishlists are identified by their ids, which are unique uuid, and live under ```/customers/<id>/wishlist/<wishlistid>```.
 
 * Find Wishlist By Customer Id
-  * GET: http://localhost:8080/customers/1/wishlist/
+  * GET: http://localhost:8080/api/customers/1/wishlist/
   
 * Find Product in Wishlist By Customer And Product Id
-  * GET: http://localhost:8080/customers/1/wishlist/958ec015-cfcf-258d-c6df-1721de0ab6ea/
+  * GET: http://localhost:8080/api/customers/1/wishlist/958ec015-cfcf-258d-c6df-1721de0ab6ea/
   
 * Add Product to Wishlist
-  * POST: http://localhost:8080/customers/1/wishlist/58ec015-cfcf-258d-c6df-1721de0ab6ea/
+  * POST: http://localhost:8080/api/customers/1/wishlist/58ec015-cfcf-258d-c6df-1721de0ab6ea/
   
 * Delete Product from Wishlist
-  * DELETE: http://localhost:8080/customers/1/wishlist/58ec015-cfcf-258d-c6df-1721de0ab6ea/
+  * DELETE: http://localhost:8080/api/customers/1/wishlist/58ec015-cfcf-258d-c6df-1721de0ab6ea/
 
 ## Authors
 
