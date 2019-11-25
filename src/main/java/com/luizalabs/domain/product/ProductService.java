@@ -11,7 +11,7 @@ public class ProductService {
     private final ProductDAO productDAO;
 
     @Inject
-    public ProductService(final ProductDAO productDAO) {
+    ProductService(final ProductDAO productDAO) {
         this.productDAO = productDAO;
     }
 

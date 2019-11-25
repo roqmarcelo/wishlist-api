@@ -12,7 +12,7 @@ create table if not exists product (
   productId varchar(36) not null,
   title varchar(255) not null,
   image varchar(255) not null,
-  price decimal(5, 2) not null,
+  price decimal(10, 2) not null,
   reviewScore float,
   foreign key (customerId) references customer(id),
   unique key id_customer_product (customerid, productId)

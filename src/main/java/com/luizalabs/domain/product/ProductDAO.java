@@ -3,10 +3,7 @@ package com.luizalabs.domain.product;
 import com.luizalabs.infrastructure.database.DataSource;
 
 import javax.inject.Inject;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class ProductDAO {
@@ -40,7 +37,7 @@ public class ProductDAO {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_PRODUCT_SQL)) {
             statement.setLong(1, customerId);
-            statement.setString(1, productId);
+            statement.setString(2, productId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 return ProductConverter.ofResultSet(resultSet).asSingleProduct();
             }
@@ -57,7 +54,11 @@ public class ProductDAO {
             statement.setString(3, product.getTitle());
             statement.setString(4, product.getImage());
             statement.setDouble(5, product.getPrice());
-            statement.setInt(6, product.getReviewScore());
+            if (product.getReviewScore() == null) {
+                statement.setNull(6, Types.FLOAT);
+            } else {
+                statement.setInt(6, product.getReviewScore());
+            }
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Could not create client.");
