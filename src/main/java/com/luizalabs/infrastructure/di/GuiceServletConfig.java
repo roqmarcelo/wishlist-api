@@ -11,13 +11,17 @@ import com.luizalabs.domain.product.ProductDAO;
 import com.luizalabs.domain.product.ProductResourceHandler;
 import com.luizalabs.domain.product.ProductService;
 import com.luizalabs.rest.RestServlet;
+import com.luizalabs.security.AuthServlet;
+import com.luizalabs.security.JWTFilter;
 
 import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class GuiceServletConfig extends GuiceServletContextListener {
 
-    private static final String URL_PATTERN = "/api/customers/*";
+    private static final String API = "/api/*";
+    private static final String AUTH = "/api/auth/*";
+    private static final String CUSTOMERS = "/api/customers/*";
 
     @Override
     protected Injector getInjector() {
@@ -25,7 +29,9 @@ public class GuiceServletConfig extends GuiceServletContextListener {
             @Override
             protected void configureServlets() {
                 super.configureServlets();
-                serve(URL_PATTERN).with(RestServlet.class);
+                filter(API).through(JWTFilter.class);
+                serve(AUTH).with(AuthServlet.class);
+                serve(CUSTOMERS).with(RestServlet.class);
                 bind(CustomerDAO.class);
                 bind(CustomerService.class);
                 bind(CustomerResourceHandler.class);
